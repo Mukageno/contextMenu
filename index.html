@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contextMenu</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    .context-menu {
+        display: none;
+        background: #e4e4e4;
+        position: absolute;
+    }
+
+    .context-menu li {
+        padding: 10px 30px;
+    }
+
+    .context-menu li:first-child {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .context-menu li:last-child {
+        border-top: 1px solid #ccc;
+    }
+
+    .context-menu li:hover {
+        background: #ccc;
+        cursor: pointer;
+        user-select: none;
+        
+    }
+
+    input {
+        margin-top: 400px;
+    }
+</style>
+
+<body>
+    <ul class="context-menu">
+        <li id="refresh">Refresh</li>
+        <li>Cut</li>
+        <li>Copy</li>
+        <li>Paste</li>
+        <li>SelectAll</li>
+    </ul>
+
+
+    <script>
+
+        const refresh = document.querySelector('#refresh'),
+              menu = document.querySelector('.context-menu')
+        document.oncontextmenu = function () { return false };
+        let x = window.target
+        window.addEventListener("contextmenu", function(e) {
+            menu.style.display = 'block'
+            menu.style.left = event.clientX + 'px'
+            menu.style.top = event.clientY + 'px'
+        })
+        if(window.target !='li'){
+            window.addEventListener('click', function(){
+                menu.style.display = 'none'
+            })
+        }
+        refresh.addEventListener('click', function () {
+            location.reload()
+        })
+
+    </script>
+</body>
+
+</html>
